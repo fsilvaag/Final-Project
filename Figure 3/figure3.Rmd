@@ -1,0 +1,62 @@
+---
+title: "Figure3"
+author: "Edna K"
+date: "November 28, 2017"
+output: html_document
+---
+# Data Reading
+The package gdata was installed. This package helps in reading xls data from a url. 
+Activeperl was also downloaded so as to enable tje gdata package work effectively
+
+
+```{r}
+if(!require("gdata")) install.packages("gdata")
+library(gdata)
+
+url <- file.path("http://www.plantcell.org/highwire/filestream/68088/field_highwire_adjunct_files/2/TPC2017-LSB-00099R2_Supplemental_Data_Set_3.xls")
+suplemental_data3 <- read.xls(url, sheet ='Important Gene Families', skip = 151,  header = T)# reading in the data, starting from row 151
+suplemental_data3
+colnames(suplemental_data3)<-c("Gene_name","Gene_ID","Sperm_Cell","Egg_Cell","Zygote_12HAP","Zygote_24HAP","Apical_Cell","Basal_Cell")# giving names to the columns of interest
+suplemental_data3
+names(suplemental_data3)# printing out the columns names
+
+
+```
+
+
+
+```{r}
+suplemental_data3<- as.data.frame(suplemental_data3[,1:8])# since the whole data was being printed out, specify the exact colums that are necessary
+
+
+library(reshape2)# helps change the format of the data from wide to long
+data<-melt(suplemental_data3,na.rm = T,id=c("Gene_name", "Gene_ID"))
+names(data)
+colnames(suplemental_data3)
+```
+
+ 
+ 
+ #Plotting the graphs
+```{r}
+
+library(ggplot2)
+library(dplyr)
+parm<-unique(data$Gene_name)#searches for unique names of the genes
+for(i in parm){
+  plot<-data %>% filter(Gene_name==i) %>% ggplot(aes(x=Gene_ID,y=value,fill=variable))+
+    geom_bar(stat = "identity", position ="dodge")+ ggtitle(i)+ 
+    theme_minimal()  + ylab("Transcript level (TPM)") + xlab("Gene_ID") +
+    theme(plot.title = element_text(face = "bold", colour = "black", size = 20, hjust = 0.5), 
+         axis.title.y = element_text(face = "bold", colour = "black", size=20),
+         axis.title.x = element_text(face = "bold", colour = "black", size = 20, hjust = 0.5))+
+    theme(axis.text.x = element_text(angle = 90, vjust = 1))
+  
+ 
+  ggsave(plot,file=paste("fig3",i,".jpeg",sep=""))
+}
+
+```
+
+
+
