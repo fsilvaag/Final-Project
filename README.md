@@ -15,4 +15,4 @@ These folder contain the codes we used to reproduce the graphs shown in the pape
 This folder contains the codes and programs we used to preform quality control of the RNAseq data
 
 ## Readme.md Files
-All folders contain a *Readme.md* file that explains the content of each folder
+All folders contain a *Readme.md* file that explains the content of each folder. Inside some subfolders, there are md files explaining the steps followed to generate files in the folder.
