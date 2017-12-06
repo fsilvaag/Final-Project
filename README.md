@@ -1,4 +1,4 @@
-# Final-Project - Documentation
+# Final- Project - Documentation
 
 Edna Mageto,Fernando Silva and Henrique Trentin
 
