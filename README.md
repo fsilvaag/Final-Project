@@ -18,5 +18,5 @@ This folder contains the codes and programs we used to preform quality control o
 ## Readme.md Files
 All folders contain a *Readme.md* file that explains the content of each folder. Inside some subfolders, there are md files explaining the steps followed to generate files in the folder.
 
-## sratoolkit.current-win64/sratoolkit.2.8.2-1-win64 
-This is the package used to download from NCBI the sra files and convert them into a .fastq file.
+### Note:
+To delete a folder from github we first clone the folder to a local machine, then using LINUX write * $ git rm -rf <folder name> *. After that, we commit the deletion using * $ git commit -m "comment" > *. To finalize, we type * $ git push origin master *.
